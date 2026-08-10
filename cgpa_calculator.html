@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPA Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: white;
+        }
+        input, select {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+    <h1>GPA Calculator</h1>
+    <form id="gpaForm">
+        <div id="subjects"></div>
+        <button type="button" onclick="calculateGPA()">Calculate GPA</button>
+    </form>
+    <h2 id="result"></h2>
+
+    <script>
+        // Subjects and their credits
+        const subjects = {
+            "Maths": 4,
+            "Python": 3,
+            "Tamil": 1,
+            "English": 3,
+            "BEE": 3,
+            "Physics": 3,
+            "CS Lab": 1,
+            "Physics and Chemistry Lab": 1,
+            "BE": 1
+        };
+
+        // Dynamically generate grade inputs for each subject
+        const subjectContainer = document.getElementById('subjects');
+        for (let subject in subjects) {
+            const label = document.createElement('label');
+            label.textContent = `Enter grade for ${subject} (${subjects[subject]} credits):`;
+            const select = document.createElement('select');
+            select.name = subject;
+            select.innerHTML = `
+                <option value="">Select Grade</option>
+                <option value="10">O</option>
+                <option value="9">A+</option>
+                <option value="8">A</option>
+                <option value="7">B+</option>
+                <option value="6">B</option>
+                <option value="5">C</option>
+                <option value="0">RA</option>
+            `;
+            subjectContainer.appendChild(label);
+            subjectContainer.appendChild(select);
+        }
+
+        // Function to calculate GPA
+        function calculateGPA() {
+            const form = document.getElementById('gpaForm');
+            const formData = new FormData(form);
+            let totalPoints = 0;
+            let totalCredits = 0;
+
+            for (let [subject, grade] of formData.entries()) {
+                const credits = subjects[subject];
+                const gradePoints = parseInt(grade, 10);
+
+                if (isNaN(gradePoints)) {
+                    document.getElementById('result').textContent = "Please enter valid grades for all subjects.";
+                    return;
+                }
+
+                totalPoints += credits * gradePoints;
+                totalCredits += credits;
+            }
+
+            const gpa = totalPoints / totalCredits;
+            document.getElementById('result').textContent = `Your GPA is: ${gpa.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

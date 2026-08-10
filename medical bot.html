@@ -1,0 +1,165 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Bot</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f2f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            background: #fff;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: #4caf50;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .chat-body {
+            flex: 1;
+            overflow-y: auto;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+
+        .chat-body p {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        .chat-body .user {
+            text-align: right;
+            background: #4caf50;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .chat-body .bot {
+            text-align: left;
+            background: #ddd;
+            color: black;
+            align-self: flex-start;
+        }
+
+        .chat-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        input {
+            flex: 1;
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: white;
+            background: #4caf50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">Medical Bot</div>
+        <div class="chat-body" id="chatBody"></div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Enter your symptom..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBody = document.getElementById("chatBody");
+
+        function sendMessage() {
+            const userInput = document.getElementById("userInput");
+            const userMessage = userInput.value.trim();
+
+            if (userMessage === "") {
+                return;
+            }
+
+            // Add user message to chat
+            appendMessage(userMessage, "user");
+
+            // Get bot response
+            const botResponse = getBotResponse(userMessage);
+
+            // Add bot response to chat
+            setTimeout(() => {
+                appendMessage(botResponse, "bot");
+            }, 500);
+
+            // Clear input field
+            userInput.value = "";
+        }
+
+        function appendMessage(message, sender) {
+            const messageElement = document.createElement("p");
+            messageElement.textContent = message;
+            messageElement.className = sender;
+            chatBody.appendChild(messageElement);
+
+            // Scroll to the bottom of chat
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function getBotResponse(message) {
+            const lowerCaseMessage = message.toLowerCase();
+
+            // Basic symptom-based responses
+            if (lowerCaseMessage.includes("fever")) {
+                return "It sounds like you might have a fever. Please stay hydrated and take rest. If it persists, consult a doctor.";
+            } else if (lowerCaseMessage.includes("headache")) {
+                return "For a headache, try to rest in a quiet, dark room and stay hydrated. If it doesn't go away, seek medical advice.";
+            } else if (lowerCaseMessage.includes("cold") || lowerCaseMessage.includes("cough")) {
+                return "For a cold or cough, drink warm fluids and rest. If symptoms worsen, consider visiting a doctor.";
+            } else if (lowerCaseMessage.includes("stomach pain")) {
+                return "Stomach pain can have various causes. Try eating light food and avoid heavy meals. If it persists, see a doctor.";
+            } else {
+                return "I'm sorry, I cannot diagnose that symptom. Please consult a healthcare professional for accurate advice.";
+            }
+        }
+    </script>
+</body>
+</html>
