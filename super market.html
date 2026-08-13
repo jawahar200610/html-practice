@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="width:auto;height:70px;background-color:blue;padding:10px;margin-top:10px;font-size:30px;display:flex;justify-content:center;align-items:center">Super market</div>
+    <div style ="height:500px;margin-top:30px;background-color:rgb(241, 238, 238);display:relative;">
+        <table border="1" style="display:absolute;left:100px;width:200px" >
+            <thead>
+                <tr><td>product</td>
+                <td>price</td></tr>
+                
+           </thead>
+           <tbody >
+            <tr><td>apple</td>
+            <td>$100</td></tr>
+            <tr><td>orange</td>
+            <td>$100</td>
+            </tr>   
+        <tr>
+  <td colspan="2"><input type="text" id="choice" placeholder="enter your choice .."></td>
+</tr>
+<tr>
+  <td colspan="2"><button onclick="validatechoice()">Validate</button></td>
+</tr>
+        </tbody>
+            
+        </table>
+        
+
+
+    </div>
+    <script>
+        var list = ["apple", "orange"];
+        function validatechoice() { 
+            var choice = document.getElementById("choice").value.trim().toLowerCase();
+            if (list.includes(choice)) {
+                alert("product available");
+            } else {
+                alert("product not available");
+            }
+        }
+    </script>
+</body>
+</html>

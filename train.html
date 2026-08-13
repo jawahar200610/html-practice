@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>train </title>
+</head>
+
+<body>
+    <style>
+        body {
+            overflow-x: hidden;
+            overflow-y: hidden;
+            height: 100vh;
+            background-color: rgb(33, 40, 42);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+        .sun{
+            position:absolute;
+            top:20px;
+            height:100px;
+            width:100px;
+            background:linear-gradient(to bottom left ,rgb(228, 184, 9),orange);
+            border-radius:50px;
+            left:20px;
+            box-shadow: 10px 10px 40px rgb(239, 167, 0);
+        }
+
+        .train {
+            position: absolute;
+            top: 310px;
+            left: 0;
+            height: 120px;
+            width: 1900px;
+            background: none;
+
+            transform: skewX(10deg);
+            animation-name: trainmove;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+
+        }
+
+        div {
+            position: absolute;
+            width: 250px;
+            height: 90px;
+            background-color: black;
+        }
+
+        .wheel1 {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            border-radius: 50%;
+            bottom: -30px;
+        }
+
+        .wheel2 {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            border-radius: 50%;
+            bottom: -30px;
+            right: 20px
+        }
+
+        .wheel1,
+        .wheel2 {
+            animation-name: wheel;
+            animation-iteration-count: infinite;
+            animation-duration: 1s;
+            animation-timing-function: linear;
+
+
+        }
+
+        img {
+            position: absolute;
+            top: 300px;
+            height: 200px;
+            width: 2250px;
+            left: -260px;
+        }
+
+        .cim {
+            position: absolute;
+            height: 48px;
+            width: 40px;
+            background-color: black;
+            top: -47px;
+            left: 210px;
+            border-radius: 10px 10px 0 0
+        }
+
+        .smoke {
+            position: absolute;
+            left: 225px;
+            top: -60px;
+            width: 30px;
+            height: 30px;
+            background: radial-gradient(circle at 40% 40%, #e4cece 70%, rgba(255, 255, 255, 0.492) 100%);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: smokeUp 1.5s infinite;
+            z-index: 2;
+        }
+
+        @keyframes smokeUp {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translateY(-30px) scale(1.2);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: translateY(-60px) scale(1.4);
+                opacity: 0;
+            }
+        }
+
+        @keyframes wheel {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes trainmove {
+            from {
+                left: -1300px;
+                
+            }
+           10%,30%,50%,70%,90%{ 
+                top: 306px;
+            }
+
+            to {
+                left: 1900px;
+                
+            }
+        }
+    </style>
+    <nav class="sun"></div>
+    <img src="track1.png">
+    <div class="train" id="train">
+        <div class="1" id="1">
+            <div class="wheel1"></div>
+            <div class="wheel2"></div>
+            <div
+                style="width: 60px; height: 10px; background-color: rgb(8, 8, 8); position: absolute; top: 70px; left: 250px;">
+            </div>
+
+        </div>
+        <div class="2" id="2">
+            <div class="wheel1"></div>
+            <div class="wheel2"></div>
+            <div
+                style="width: 60px; height: 10px; background-color: rgb(8, 8, 8); position: absolute; top: 70px; left: 250px;">
+            </div>
+
+        </div>
+        <div class="3" id="3">
+            <div class="wheel1"></div>
+            <div class="wheel2"></div>
+            <div
+                style="width: 60px; height: 10px; background-color: rgb(8, 8, 8); position: absolute; top: 70px; left: 250px;">
+            </div>
+        </div>
+        <div class="4" id="4">
+            <div class="wheel1"></div>
+            <div class="wheel2"></div>
+            <div class="cim"></div>
+            <div class="smoke"></div>
+        </div>
+
+    </div>
+    <script>
+
+        var startleft = 100;
+        var color = ["red", "blue", "navy"];
+        count = 0;
+        for (let i = 2; i < 5; i++) {
+            var div = document.getElementById(String(i))
+            div.style.left = startleft + 200 + "px";
+            startleft += 300
+            div.style.backgroundColor = color[count];
+            count++;
+
+        }
+
+    </script>
+
+</body>
+
+</html>
